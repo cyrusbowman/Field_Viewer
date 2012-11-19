@@ -3,7 +3,7 @@ package com.fieldviewer.opengl;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.cyrusbowman.opengl.R;
+import com.fieldviewer.opengl.R;
 
 import android.app.Activity;
 import android.content.Context;
@@ -21,6 +21,7 @@ import android.view.View.OnTouchListener;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.TextView;
 
 public class MainActivity extends Activity implements OnClickListener,
 		OnTouchListener, OnSeekBarChangeListener {
@@ -28,6 +29,7 @@ public class MainActivity extends Activity implements OnClickListener,
 	private MyGLSurfaceView ourSurface;
 	private SeekBar seekRain;
 	private ProgressBar progress;
+	private TextView tvWaterPlaneHeight;
 
 	private float minZoom = 1750.0f;
 	private float maxZoom = 250.0f;
@@ -39,10 +41,9 @@ public class MainActivity extends Activity implements OnClickListener,
 		setContentView(R.layout.activity_main);
 
 		ourSurface = (MyGLSurfaceView) findViewById(R.id.surfaceviewclass);
-
 		seekRain = (SeekBar) findViewById(R.id.seekRain);
-
 		progress = (ProgressBar) findViewById(R.id.progressBar);
+		tvWaterPlaneHeight = (TextView) findViewById(R.id.tvWaterPlaneHeight);
 
 		seekRain.setOnSeekBarChangeListener(this);
 
@@ -306,6 +307,8 @@ public class MainActivity extends Activity implements OnClickListener,
 		// TODO Auto-generated method stub
 		ourSurface.mRenderer.zWaterPlaneProgress = progress;
 		ourSurface.requestRender();
+		int feet = Math.round((ourSurface.mRenderer.zWaterPlaneMaxHeight * (progress * 0.01f) * 3.28084f));
+		tvWaterPlaneHeight.setText(Integer.toString(feet) + " feet");
 	}
 
 	@Override

@@ -12,7 +12,7 @@ import java.util.List;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
-import com.cyrusbowman.opengl.R;
+import com.fieldviewer.opengl.R;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -24,6 +24,7 @@ import android.opengl.GLU;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 public class GLRenderer implements Renderer {
 
@@ -33,7 +34,7 @@ public class GLRenderer implements Renderer {
 	public volatile float zAngle;
 	public volatile float yTrans;
 	public volatile float xTrans;
-	public volatile float zWaterPlane;
+	public volatile float zWaterPlaneMaxHeight;
 	public volatile int zWaterPlaneProgress;
 	public volatile float zZoom;
 
@@ -43,6 +44,7 @@ public class GLRenderer implements Renderer {
 
 	private BitmapLand landImage;
 	private LasFile landLas;
+	private Float zWaterPlane;
 
 	public GLRenderer(Context context, MyGLSurfaceView theSurface) {
 		// Cube = new GLCube();
@@ -137,10 +139,10 @@ public class GLRenderer implements Renderer {
 			landLas.draw(gl);
 			if (water == null) {
 				water = new WaterPlane(landLas.maxX, landLas.maxY);
+				zWaterPlaneMaxHeight = landLas.maxZ;
 			}
-
+			
 			zWaterPlane = landLas.maxZ * (zWaterPlaneProgress * 0.01f) * -1.0f;
-
 			gl.glTranslatef(0, 0, zWaterPlane);
 			water.draw(gl);
 			gl.glTranslatef(0, 0, -zWaterPlane);
@@ -727,11 +729,7 @@ class LasFile {
 
 				}
 
-				// Toast.makeText(context,
-				// Integer.toString(mapImage.getWidth()),
-				// Toast.LENGTH_LONG).show();
-
-				// Initailize buffers
+				// Initialize buffers
 
 				// (# of coordinate values * 4 bytes per float)
 				ByteBuffer bb = ByteBuffer.allocateDirect(coords.size() * 4);
