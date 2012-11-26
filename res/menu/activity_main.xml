@@ -2,10 +2,13 @@
     <item android:id="@+id/lasMap1"
         android:title="Load Buckmaster's Field"
         android:showAsAction="never" />
+    <item android:id="@+id/lasMap2"
+        android:title="Load Aarons's Field"
+        android:showAsAction="never" />
     <item android:id="@+id/reset"
         android:title="Reset Map"
-        android:showAsAction="never" />
+        android:showAsAction="always" />
      <item android:id="@+id/viewAngle"
         android:title="Alt. View Angle"
-        android:showAsAction="never" />
+        android:showAsAction="always" />
 </menu>

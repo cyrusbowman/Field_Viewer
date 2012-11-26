@@ -24,13 +24,14 @@ public final class R {
     public static final class id {
         public static final int InnerRelativeLayout=0x7f090001;
         public static final int lasMap1=0x7f090006;
+        public static final int lasMap2=0x7f090007;
         public static final int progressBar=0x7f090000;
-        public static final int reset=0x7f090007;
+        public static final int reset=0x7f090008;
         public static final int seekRain=0x7f090004;
         public static final int surfaceviewclass=0x7f090005;
         public static final int tvRainCaption=0x7f090002;
         public static final int tvWaterPlaneHeight=0x7f090003;
-        public static final int viewAngle=0x7f090008;
+        public static final int viewAngle=0x7f090009;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -39,7 +40,8 @@ public final class R {
         public static final int activity_main=0x7f080000;
     }
     public static final class raw {
-        public static final int test=0x7f040000;
+        public static final int aaron=0x7f040000;
+        public static final int test=0x7f040001;
     }
     public static final class string {
         public static final int app_name=0x7f060000;

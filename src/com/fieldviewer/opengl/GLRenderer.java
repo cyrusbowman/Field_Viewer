@@ -565,11 +565,11 @@ class LasFile {
 						for (int x = 0; x < points; x++) {
 							coords.add(incrementX * x * (-1.0f));
 							coords.add(incrementY * y);
-							coords.add(0.0f); // Z for now
+							coords.add(0.0f); // Z for now highest
 						}
 					}
 
-					is = context.getResources().openRawResource(R.raw.test);
+					is = context.getResources().openRawResource(this.resourceId);
 					is.skip(intOffsetToPointData);
 
 					// List<Float> zValue = new ArrayList<Float>();
@@ -638,6 +638,7 @@ class LasFile {
 							double dblZ = (double) ((lngZ * dblZscale) + dblZoffset);
 
 							int theCoord = points * coordY + coordX;
+							//Log.d("theCoord", Integer.toString(theCoord));
 							zValue[theCoord] = (float) (zValue[theCoord] + (dblZ - dblMinZ));
 							zCount[theCoord] = zCount[theCoord] + 1;
 						}
@@ -668,8 +669,9 @@ class LasFile {
 								minHeight = avg;
 							}
 						} else {
-							coords.set(zCoordIndex,
-									(float) ((dblMaxZ - dblMinZ) * -1.0f));
+							//coords.set(zCoordIndex,
+								//	(float) ((dblMaxZ - dblMinZ) * -1.0f)); //Set to max height
+							coords.set(zCoordIndex,0.0f); //Set to min
 						}
 						if (i < 30) {
 							Log.d("Coordinates:",

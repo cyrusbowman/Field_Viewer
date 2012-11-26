@@ -49,7 +49,7 @@ public class MainActivity extends Activity implements OnClickListener,
 
 		ourSurface.setOnTouchListener(this);
 
-		ourSurface.mRenderer.loadLas(R.raw.test, progress); // Load Buckmaster
+		ourSurface.mRenderer.loadLas(R.raw.aaron, progress); // Load Buckmaster
 	}
 
 	@Override
@@ -59,6 +59,9 @@ public class MainActivity extends Activity implements OnClickListener,
 		switch (item.getItemId()) {
 		case R.id.lasMap1:
 			ourSurface.mRenderer.loadLas(R.raw.test, progress);
+			break;
+		case R.id.lasMap2:
+			ourSurface.mRenderer.loadLas(R.raw.aaron, progress);
 			break;
 		case R.id.reset:
 			ourSurface.mRenderer.xTrans = 0.0f;
@@ -328,7 +331,7 @@ public class MainActivity extends Activity implements OnClickListener,
 class MyGLSurfaceView extends GLSurfaceView {
 
 	public final GLRenderer mRenderer;
-
+	
 	public MyGLSurfaceView(Context context, AttributeSet attr) {
 		super(context, attr);
 		// Set the Renderer for drawing on the GLSurfaceView
