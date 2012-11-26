@@ -12,8 +12,6 @@ import java.util.List;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
-import com.fieldviewer.opengl.R;
-
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -24,7 +22,6 @@ import android.opengl.GLU;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 public class GLRenderer implements Renderer {
 
@@ -137,7 +134,8 @@ public class GLRenderer implements Renderer {
 		}
 		if (landLas.loaded) {
 			landLas.draw(gl);
-			if (water == null) {
+			if (water == null || landLas.reloaded) {
+				landLas.reloaded = false;
 				water = new WaterPlane(landLas.maxX, landLas.maxY);
 				zWaterPlaneMaxHeight = landLas.maxZ;
 			}
@@ -297,6 +295,8 @@ class LasFile {
 	private MyGLSurfaceView ourSurface;
 
 	public boolean loaded = false;
+	public boolean reloaded = false;
+	
 	public float maxX = 0.0f;
 	public float maxY = 0.0f;
 	public float maxZ = 0.0f;
@@ -849,6 +849,7 @@ class LasFile {
 				maxY = renderBuffs.maxY;
 				maxZ = renderBuffs.maxZ;
 				loaded = true;
+				reloaded = true;
 				ourSurface.requestRender();
 			}
 		}
